@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cylwyc.demo.dao.ArticleDao">
+    <resultMap id="kw" type="com.cylwyc.demo.domain.KeywordWeight">
+        <result property="keywordWeight" column="keywordWeight" />
+        <result property="keywordName" column="keywordName" />
+    </resultMap>
+    <resultMap id="article" type="com.cylwyc.demo.domain.Article">
+        <collection property="keywordWeights" resultMap="com.cylwyc.demo.dao.ArticleDao.kw" />
+        <collection property="source" resultMap="source" />
+    </resultMap>
+    <resultMap id="source" type="com.cylwyc.demo.domain.Source">
+        <result property="sourceName" column="sourceName" />
+        <result property="sourceType" column="sourceType" />
+    </resultMap>
+    <select id="queryArticleById" resultMap="article">
+        SELECT article.articleId,typeName,
+            articleTitle,articleText,
+            articlePicUrl,articleUpNumber,
+            articleDownNumber,articleTime,
+            (SELECT AVG(articleScore) From article,articlescore Where article.articleId=#{articleId} and articlescore.articleId=article.articleId) articleScore,sourceName,
+            keywordName,keywordWeight
+            sourceType,stratDate
+        FROM article,type,source,keyword,keywordweight
+        WHERE article.articleId=#{articleId}
+        AND article.typeId=type.typeId
+        AND article.sourceId=source.sourceId
+        AND article.articleId=keywordweight.articleId
+        AND keywordweight.keywordId=keyword.keywordId
+    </select>
+    <select id="queryHottestArticleByTypeId" resultType="com.cylwyc.demo.domain.Article">
+        SELECT AVG(articleScore) avgScore,article.articleId
+        FROM article,articlescore
+        WHERE article.typeId=#{typeId}
+        AND article.articleId=articlescore.articleId
+        GROUP BY article.articleId
+        ORDER BY avgScore DESC
+        LIMIT 0,1
+    </select>
+    <select id="queryArticleByIdAndUserId" resultType="com.cylwyc.demo.domain.Article">
+        SELECT article.articleId,typeName,
+            articleTitle,articleText,
+            articlePicUrl,articleUpNumber,
+            articleDownNumber,articleTime,
+            (SELECT AVG(articleScore) From article,articlescore Where article.articleId=1 and articlescore.articleId=article.articleId) articleScore,sourceName,
+            sourceType,stratDate,
+            keywordWeight,keywordName,
+            upOrDown,collectTime
+        FROM article,type,source,keywordWeight,keyword,upAndDown,collection
+        WHERE  article.articleId=#{articleId}
+        AND upAndDown.userId=#{userId}
+        AND collection.userId=#{userId}
+        AND article.typeId=type.typeId
+        AND article.sourceId=source.sourceId
+        AND article.articleId=keywordWeight.articleId
+        AND article.articleId=upAndDown.articleId
+        AND article.articleId=collection.articleId
+        AND keywordWeight.keywordId=keyword.keywordId
+    </select>
+    <select id="queryHistoryRecordByUserId" resultType="com.cylwyc.demo.domain.Article">
+        SELECT article.articleId,typeName,
+            articleTitle,articleText,
+            articlePicUrl,articleUpNumber,
+            articleDownNumber,articleTime,
+            sourceName,
+            sourceType,stratDate,
+            keywordWeight,keywordName,
+            upOrDown,collectTime,
+            historyRecordTime
+        FROM historyRecord,article,type,source,keywordWeight,keyword,upAndDown,collection
+        WHERE historyRecord.userId=#{userId}
+        AND upAndDown.userId=historyRecord.userId
+        AND upAndDown.articleId=historyRecord.articleId
+        AND collection.userId=historyRecord.userId
+        AND collection.articleId=historyRecord.articleId
+        AND historyRecord.articleId=article.articleId
+        AND article.typeId=type.typeId
+        AND article.sourceId=source.sourceId
+        AND article.articleId=keywordWeight.articleId
+        AND keywordWeight.keywordId=keyword.keywordId
+    </select>
+    <select id="queryCollectionByUserId" resultType="com.cylwyc.demo.domain.Article">
+        SELECT article.articleId,typeName,
+            articleTitle,articleText,
+            articlePicUrl,articleUpNumber,
+            articleDownNumber,articleTime,
+            sourceName,
+            sourceType,stratDate,
+            keywordWeight,keywordName,
+            upOrDown,collectTime
+        FROM collection,article,type,source,keywordWeight,keyword,upAndDown
+        WHERE collection.userId=#{userId}
+        AND upAndDown.userId=collection.userId
+        AND upAndDown.articleId=collection.articleId
+        AND article.typeId=type.typeId
+        AND article.sourceId=source.sourceId
+        AND article.articleId=keywordWeight.articleId
+        AND keywordWeight.keywordId=keyword.keywordId
+    </select>
+</mapper>

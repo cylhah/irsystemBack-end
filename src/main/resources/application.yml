@@ -1,0 +1,17 @@
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/irsystem?useUnicode=true&characterEncoding=utf8
+#    username: root
+#    password: isayaiu123
+
+
+jdbc:
+  Driver: com.mysql.jdbc.Driver
+  Url: jdbc:mysql://127.0.0.1:3306/irsystem?useUnicode=true&characterEncoding=utf8
+  Username: root
+  Password: isayaiu123
+
+mybatis_config_file: mybatis-config.xml
+mapper_path: /mapper/**.xml
+entity_package: com.cyl.demo.domain

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cylwyc.demo.dao.CommentDao">
+    <select id="queryCommentById" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentId,articleId,userId
+            targetCommentId,replyCommentId,commentText,
+            commentTime,commentUpNumber,commentType,
+            immediateNumber
+        FROM comment
+        WHERE commentId=#{commentId}
+    </select>
+    <select id="queryCommentByArticleId" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentId,articleId,userId
+            targetCommentId,replyCommentId,commentText,
+            commentTime,commentUpNumber,commentType,
+            immediateNumber
+        FROM comment
+        WHERE articleId=#{articleId}
+    </select>
+    <select id="queryCommentByUserId" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentId,articleId,userId
+        targetCommentId,replyCommentId,commentText,
+        commentTime,commentUpNumber,commentType,
+        immediateNumber
+        FROM comment
+        WHERE userId=#{userId}
+    </select>
+    <insert id="insertComment" useGeneratedKeys="true" keyProperty="commentId"
+                keyColumn="commentId" parameterType="com.cylwyc.demo.domain.Comment">
+        INSERT INTO
+        comment(articleId,userId,targetCommentId,
+                replyCommentId,commentText,commentTime,
+                commentUpNumber,commentType,immediateNumber)
+        VALUES (#{articleId},#{userId},#{targetCommentId},
+        #{replyCommentId},#{commentText},#{commentTime},
+        #{commentUpNumber},#{commentType},#{immediateNumber})
+    </insert>
+</mapper>
