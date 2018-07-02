@@ -21,4 +21,12 @@ public class KeywordWeight {
     public void setKeywordName(String keywordName) {
         this.keywordName = keywordName;
     }
+
+    @Override
+    public String toString() {
+        return "KeywordWeight{" +
+                "keywordWeight=" + keywordWeight +
+                ", keywordName='" + keywordName + '\'' +
+                '}';
+    }
 }

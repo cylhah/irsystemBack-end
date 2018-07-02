@@ -8,8 +8,17 @@
         <result property="keywordName" column="keywordName" />
     </resultMap>
     <resultMap id="article" type="com.cylwyc.demo.domain.Article">
+        <result property="articleId" column="articleId" />
+        <result property="typeName" column="typeName" />
+        <result property="articleTitle" column="articleTitle" />
+        <result property="articleText" column="articleText" />
+        <result property="articlePicUrl" column="articlePicUrl" />
+        <result property="articleUpNumber" column="articleUpNumber" />
+        <result property="articleDownNumber" column="articleDownNumber" />
+        <result property="articleTime" column="articleTime" />
+        <result property="articleScore" column="articleScore" />
         <collection property="keywordWeights" resultMap="com.cylwyc.demo.dao.ArticleDao.kw" />
-        <collection property="source" resultMap="source" />
+        <collection property="source" resultMap="com.cylwyc.demo.dao.ArticleDao.source" />
     </resultMap>
     <resultMap id="source" type="com.cylwyc.demo.domain.Source">
         <result property="sourceName" column="sourceName" />

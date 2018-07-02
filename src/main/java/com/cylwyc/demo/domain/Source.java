@@ -43,4 +43,14 @@ public class Source {
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
+
+    @Override
+    public String toString() {
+        return "Source{" +
+                "sourceId=" + sourceId +
+                ", sourceName='" + sourceName + '\'' +
+                ", sourceType='" + sourceType + '\'' +
+                ", startDate=" + startDate +
+                '}';
+    }
 }
