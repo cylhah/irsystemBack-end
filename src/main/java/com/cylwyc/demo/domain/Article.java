@@ -2,7 +2,6 @@ package com.cylwyc.demo.domain;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class Article {
 
@@ -28,7 +27,7 @@ public class Article {
 
     private List<KeywordWeight> keywordWeights;
 
-    private Boolean upOrDown;
+    private int upOrDown;
 
     private Date collectTime;
 
@@ -58,11 +57,11 @@ public class Article {
         this.historyRecordTime = historyRecordTime;
     }
 
-    public Boolean getUpOrDown() {
+    public int getUpOrDown() {
         return upOrDown;
     }
 
-    public void setUpOrDown(Boolean upOrDown) {
+    public void setUpOrDown(int upOrDown) {
         this.upOrDown = upOrDown;
     }
 

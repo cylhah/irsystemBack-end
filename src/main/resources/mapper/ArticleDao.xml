@@ -17,6 +17,9 @@
         <result property="articleDownNumber" column="articleDownNumber" />
         <result property="articleTime" column="articleTime" />
         <result property="articleScore" column="articleScore" />
+        <result property="upOrDown" column="upOrDown" />
+        <result property="collectTime" column="collectTime" />
+        <result property="historyRecordTime" column="historyRecordTime" />
         <collection property="keywordWeights" resultMap="com.cylwyc.demo.dao.ArticleDao.kw" />
         <collection property="source" resultMap="com.cylwyc.demo.dao.ArticleDao.source" />
     </resultMap>
@@ -55,10 +58,9 @@
             articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
-            keywordWeight,keywordName,
             upOrDown,collectTime,
             historyRecordTime
-        FROM historyRecord,article,type,source,keywordWeight,keyword,upAndDown,collection
+        FROM historyRecord,article,type,source,upAndDown,collection
         WHERE historyRecord.userId=#{userId}
         AND upAndDown.userId=historyRecord.userId
         AND upAndDown.articleId=historyRecord.articleId
@@ -67,8 +69,6 @@
         AND historyRecord.articleId=article.articleId
         AND article.typeId=type.typeId
         AND article.sourceId=source.sourceId
-        AND article.articleId=keywordWeight.articleId
-        AND keywordWeight.keywordId=keyword.keywordId
         ORDER BY historyRecordTime DESC
     </select>
     <select id="queryCollectionByUserId" resultMap="article">
