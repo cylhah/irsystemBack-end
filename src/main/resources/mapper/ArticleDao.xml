@@ -48,7 +48,7 @@
         ORDER BY avgScore DESC
         LIMIT 0,1
     </select>
-    <select id="queryArticleByIdAndUserId" resultType="com.cylwyc.demo.domain.Article">
+    <select id="queryArticleByIdAndUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
             articlePicUrl,articleUpNumber,
@@ -68,7 +68,7 @@
         AND article.articleId=collection.articleId
         AND keywordWeight.keywordId=keyword.keywordId
     </select>
-    <select id="queryHistoryRecordByUserId" resultType="com.cylwyc.demo.domain.Article">
+    <select id="queryHistoryRecordByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
             articlePicUrl,articleUpNumber,
@@ -90,7 +90,7 @@
         AND article.articleId=keywordWeight.articleId
         AND keywordWeight.keywordId=keyword.keywordId
     </select>
-    <select id="queryCollectionByUserId" resultType="com.cylwyc.demo.domain.Article">
+    <select id="queryCollectionByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
             articlePicUrl,articleUpNumber,
