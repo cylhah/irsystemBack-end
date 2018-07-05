@@ -9,9 +9,6 @@ import java.util.List;
 
 public interface UserDao {
     User queryUserById(@Param("userId") int userId);
-    List<Type> queryUserTypeById(@Param("userId") int userId);
-    int insertType(@Param("userId") int userId,@Param("typeId") int typeId);
-    int deleteType(@Param("userId") int userId,@Param("typeId") int typeId);
     int insertUser(User user);
     int updateUser(User user);
 }

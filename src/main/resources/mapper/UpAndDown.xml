@@ -3,17 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.UpAndDownDao">
-    <insert id="insertUpArticle">
-        INSERT INTO
-        upAndDown(userId,articleId,upOrDown)
-        VALUES
-        (#{userId},#{articleId},true)
-    </insert>
-    <insert id="insertDownArticle">
-        INSERT INTO
-        upAndDown(userId,articleId,upOrDown)
-        VALUES
-        (#{userId},#{articleId},false)
+    <select id="queryUpAndDown">
+        SELECT upOrDown
+        FROM upanddown
+        WHERE userId=#{userId}
+        AND articleId=#{articleId}
+    </select>
+    <insert id="insertUpAndDown">
+        INSERT INTO upanddown (userId, articleId, upOrDown)
+                VALUES (#{userId},#{articleId},#{upOrDown})
     </insert>
     <delete id="deleteUpAndDownDao">
         DELETE FROM

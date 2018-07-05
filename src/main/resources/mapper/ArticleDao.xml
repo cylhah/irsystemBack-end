@@ -48,26 +48,6 @@
         ORDER BY avgScore DESC
         LIMIT 0,1
     </select>
-    <select id="queryArticleByIdAndUserId" resultMap="article">
-        SELECT article.articleId,typeName,
-            articleTitle,articleText,
-            articlePicUrl,articleUpNumber,
-            articleDownNumber,articleTime,
-            (SELECT AVG(articleScore) From article,articlescore Where article.articleId=1 and articlescore.articleId=article.articleId) articleScore,sourceName,
-            sourceType,stratDate,
-            keywordWeight,keywordName,
-            upOrDown,collectTime
-        FROM article,type,source,keywordWeight,keyword,upAndDown,collection
-        WHERE  article.articleId=#{articleId}
-        AND upAndDown.userId=#{userId}
-        AND collection.userId=#{userId}
-        AND article.typeId=type.typeId
-        AND article.sourceId=source.sourceId
-        AND article.articleId=keywordWeight.articleId
-        AND article.articleId=upAndDown.articleId
-        AND article.articleId=collection.articleId
-        AND keywordWeight.keywordId=keyword.keywordId
-    </select>
     <select id="queryHistoryRecordByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
@@ -89,6 +69,7 @@
         AND article.sourceId=source.sourceId
         AND article.articleId=keywordWeight.articleId
         AND keywordWeight.keywordId=keyword.keywordId
+        ORDER BY historyRecordTime DESC
     </select>
     <select id="queryCollectionByUserId" resultMap="article">
         SELECT article.articleId,typeName,
@@ -107,5 +88,6 @@
         AND article.sourceId=source.sourceId
         AND article.articleId=keywordWeight.articleId
         AND keywordWeight.keywordId=keyword.keywordId
+        ORDER BY collectTime DESC
     </select>
 </mapper>
