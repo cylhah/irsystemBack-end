@@ -3,8 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.CollectionDao">
-    <select id="queryCollection">
+    <select id="queryCollection" resultType="int">
         SELECT count(*)
+        FROM collection
+        WHERE articleId=#{articleId}
+        AND userId=#{userId}
+    </select>
+    <select id="queryCollectionTime" resultType="Date">
+        SELECT collectTime
         FROM collection
         WHERE articleId=#{articleId}
         AND userId=#{userId}

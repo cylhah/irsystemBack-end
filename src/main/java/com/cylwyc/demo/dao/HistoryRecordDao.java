@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface HistoryrecordDao {
+public interface HistoryRecordDao {
     int insertHistoryRecord(@Param("userId") int userId,@Param("articleId") int articleId);
     int deleteHistoryRecord(@Param("userId") int userId,@Param("articleId") int articleId);
 }

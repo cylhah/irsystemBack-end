@@ -3,8 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.UpAndDownDao">
-    <select id="queryUpAndDown">
-        SELECT upOrDown
+    <select id="queryUpAndDown" resultType="int">
+        SELECT ifnull(max(upOrDown),0)
         FROM upanddown
         WHERE userId=#{userId}
         AND articleId=#{articleId}

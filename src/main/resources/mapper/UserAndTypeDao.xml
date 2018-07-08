@@ -3,14 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.UserAndTypeDao">
-    <select id="queryUserTypeById" resultType="com.cylwyc.demo.domain.Type">
+    <select id="queryTypeByUserId" resultType="com.cylwyc.demo.domain.Type">
         SELECT type.typeId,typeName,typeDescription
         FROM user,type,userandtype
         WHERE user.userId=#{userId}
         AND  user.userId=userandtype.userId
         AND type.typeId=userandtype.typeId
     </select>
-    <select id="queryUserAndType">
+    <select id="queryUserAndType" resultType="int">
         SELECT count(*)
         FROM userandtype
         WHERE userId=#{userId}

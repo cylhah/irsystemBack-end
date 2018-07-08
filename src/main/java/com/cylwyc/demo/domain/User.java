@@ -19,15 +19,15 @@ public class User {
 
     private Date userRegisTime;
 
-    private Integer userHeadUrl;
+    private String userHeadUrl;
 
     private List<Type> type;
 
-    public Integer getUserHeadUrl() {
+    public String getUserHeadUrl() {
         return userHeadUrl;
     }
 
-    public void setUserHeadUrl(Integer userHeadUrl) {
+    public void setUserHeadUrl(String userHeadUrl) {
         this.userHeadUrl = userHeadUrl;
     }
 

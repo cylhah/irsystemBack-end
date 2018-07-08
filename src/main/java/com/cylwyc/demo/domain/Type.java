@@ -31,4 +31,13 @@ public class Type {
     public void setTypeDescription(String typeDescription) {
         this.typeDescription = typeDescription;
     }
+
+    @Override
+    public String toString() {
+        return "Type{" +
+                "typeId=" + typeId +
+                ", typeName='" + typeName + '\'' +
+                ", typeDescription='" + typeDescription + '\'' +
+                '}';
+    }
 }

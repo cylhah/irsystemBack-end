@@ -58,14 +58,9 @@
             articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
-            upOrDown,collectTime,
             historyRecordTime
-        FROM historyRecord,article,type,source,upAndDown,collection
+        FROM historyRecord,article,type,source,collection
         WHERE historyRecord.userId=#{userId}
-        AND upAndDown.userId=historyRecord.userId
-        AND upAndDown.articleId=historyRecord.articleId
-        AND collection.userId=historyRecord.userId
-        AND collection.articleId=historyRecord.articleId
         AND historyRecord.articleId=article.articleId
         AND article.typeId=type.typeId
         AND article.sourceId=source.sourceId
@@ -78,16 +73,12 @@
             articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
-            keywordWeight,keywordName,
-            upOrDown,collectTime
-        FROM collection,article,type,source,keywordWeight,keyword,upAndDown
+            collectTime
+        FROM collection,article,type,source
         WHERE collection.userId=#{userId}
-        AND upAndDown.userId=collection.userId
-        AND upAndDown.articleId=collection.articleId
+        AND collection.articleId=article.articleId
         AND article.typeId=type.typeId
         AND article.sourceId=source.sourceId
-        AND article.articleId=keywordWeight.articleId
-        AND keywordWeight.keywordId=keyword.keywordId
         ORDER BY collectTime DESC
     </select>
 </mapper>
