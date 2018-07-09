@@ -3,13 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.HistoryRecordDao">
+    <select id="queryHistoryRecord" resultType="int">
+        SELECT count(*)
+        FROM historyrecord
+        WHERE userId=#{userId}
+        AND articleId=#{articleId}
+    </select>
     <insert id="insertHistoryRecord">
         INSERT INTO historyrecord(userId,articleId)
                 VALUES (#{userId},#{articleId})
     </insert>
+    <update id="updateHistoryRecord">
+        UPDATE historyrecord
+        SET historyRecordTime=#{historyRecordTime}
+        WHERE userId=#{userId}
+        AND articleId=#{articleId}
+    </update>
     <delete id="deleteHistoryRecord">
         DELETE FROM historyrecord
         WHERE userId=#{userId}
         AND articleId=#{articleId}
+    </delete>
+    <delete id="deleteAllHistoryRecordByUserId">
+        DELETE FROM
+        historyrecord
+        WHERE userId=#{userId}
     </delete>
 </mapper>

@@ -33,11 +33,9 @@ public class ArticleServiceImpl implements ArticleService {
         for (int i = 0;i <articleList.size();i++){
             Article article = articleList.get(i);
             int articleId = article.getArticleId();
-            int upOrDown = upAndDownDao.queryUpAndDown(article.getArticleId(),userId);
+            int upOrDown = upAndDownDao.queryUpAndDown(articleId,userId);
             articleList.get(i).setUpOrDown(upOrDown);
-            if (collectionDao.queryCollection(articleId,userId)==1){
-                articleList.get(i).setCollectTime(collectionDao.queryCollectionTime(articleId,userId));
-            }
+            articleList.get(i).setCollectTime(collectionDao.queryCollectionTime(articleId,userId));
         }
         return articleList;
     }
@@ -46,8 +44,10 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getCollectionByUserId(int userId) {
         List<Article> articleList = articleDao.queryCollectionByUserId(userId);
         for (int i=0;i<articleList.size();i++){
-
+            int articleId = articleList.get(i).getArticleId();
+            int upOrDown = upAndDownDao.queryUpAndDown(articleId,userId);
+            articleList.get(i).setUpOrDown(upOrDown);
         }
-        return null;
+        return articleList;
     }
 }
