@@ -28,6 +28,17 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Article> getTopNArticleIdByTypeName(String typeName, int topNum) {
+        List<Integer> articleIdList = articleDao.queryTopNArticleIdByTypeName(typeName,topNum);
+        List<Article> articleList = null;
+        for (int i=0;i<articleIdList.size();i++){
+            int articleId = articleIdList.get(i);
+            articleList.add(articleDao.queryArticleById(articleId));
+        }
+        return articleList;
+    }
+
+    @Override
     public List<Article> getHistoryRecordByUserId(int userId) {
         List<Article> articleList = articleDao.queryHistoryRecordByUserId(userId);
         for (int i = 0;i <articleList.size();i++){

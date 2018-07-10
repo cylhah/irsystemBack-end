@@ -17,6 +17,7 @@
         <result property="articleDownNumber" column="articleDownNumber" />
         <result property="articleTime" column="articleTime" />
         <result property="articleScore" column="articleScore" />
+        <result property="clickNumber" column="clickNumber" />
         <result property="upOrDown" column="upOrDown" />
         <result property="collectTime" column="collectTime" />
         <result property="historyRecordTime" column="historyRecordTime" />
@@ -34,7 +35,7 @@
             articleDownNumber,articleTime,
             (SELECT AVG(articleScore) From article,articlescore Where article.articleId=#{articleId} and articlescore.articleId=article.articleId) articleScore,sourceName,
             keywordName,keywordWeight
-            sourceType,stratDate
+            sourceType,stratDate,clickNumber
         FROM article,type,source,keyword,keywordweight
         WHERE article.articleId=#{articleId}
         AND article.typeId=type.typeId
@@ -42,14 +43,14 @@
         AND article.articleId=keywordweight.articleId
         AND keywordweight.keywordId=keyword.keywordId
     </select>
-    <select id="queryHottestArticleByTypeId" resultType="com.cylwyc.demo.domain.Article">
-        SELECT AVG(articleScore) avgScore,article.articleId
+    <select id="queryTopNArticleIdByTypeName" resultType="Integer">
+        SELECT article.articleId
         FROM article,articlescore
-        WHERE article.typeId=#{typeId}
-        AND article.articleId=articlescore.articleId
+        WHERE article.typeId=(SELECT typeId FROM type WHERE typeName=#{typeName})
+        AND article.articleId=articleScore.articleId
         GROUP BY article.articleId
-        ORDER BY avgScore DESC
-        LIMIT 0,1
+        ORDER BY avg(articleScore) DESC
+        LIMIT 0,${topNum}
     </select>
     <select id="queryHistoryRecordByUserId" resultMap="article">
         SELECT article.articleId,typeName,
@@ -58,7 +59,7 @@
             articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
-            historyRecordTime
+            clickNumber,historyRecordTime
         FROM historyRecord,article,type,source,collection
         WHERE historyRecord.userId=#{userId}
         AND historyRecord.articleId=article.articleId
@@ -73,7 +74,7 @@
             articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
-            collectTime
+            clickNumber,collectTime
         FROM collection,article,type,source
         WHERE collection.userId=#{userId}
         AND collection.articleId=article.articleId

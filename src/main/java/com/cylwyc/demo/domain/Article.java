@@ -27,11 +27,21 @@ public class Article {
 
     private List<KeywordWeight> keywordWeights;
 
+    private int clickNumber;
+
     private int upOrDown;
 
     private Date collectTime;
 
     private Date historyRecordTime;
+
+    public int getClickNumber() {
+        return clickNumber;
+    }
+
+    public void setClickNumber(int clickNumber) {
+        this.clickNumber = clickNumber;
+    }
 
     public Date getCollectTime() {
         return collectTime;
