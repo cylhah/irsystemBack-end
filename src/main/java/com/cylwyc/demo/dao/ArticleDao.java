@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface ArticleDao {
     Article queryArticleById(@Param("articleId") int articleId);
+    int plusArticleClickNumber(@Param("articleId") int articleId);
     List<Integer> queryTopNArticleIdByTypeName(@Param("typeName") String typeName,@Param("topNum") int topNum);
     List<Article> queryHistoryRecordByUserId(@Param("userId") int userId);
     List<Article> queryCollectionByUserId(@Param("userId") int userId);

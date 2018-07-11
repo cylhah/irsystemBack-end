@@ -67,6 +67,11 @@
         AND article.sourceId=source.sourceId
         ORDER BY historyRecordTime DESC
     </select>
+    <update id="plusArticleClickNumber">
+        UPDATE article
+        SET clickNumber=clickNumber+1
+        WHERE articleId=#{articleId}
+    </update>
     <select id="queryCollectionByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,

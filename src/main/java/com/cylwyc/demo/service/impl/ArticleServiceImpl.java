@@ -28,6 +28,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public int plusArticleClickNumber(int articleId) {
+        return articleDao.plusArticleClickNumber(articleId);
+    }
+
+    @Override
     public List<Article> getTopNArticleIdByTypeName(String typeName, int topNum) {
         List<Integer> articleIdList = articleDao.queryTopNArticleIdByTypeName(typeName,topNum);
         List<Article> articleList = null;
