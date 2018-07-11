@@ -3,38 +3,84 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.CommentDao">
-    <select id="queryCommentById" resultType="com.cylwyc.demo.domain.Comment">
+    <select id="queryCommentChildById" resultType="com.cylwyc.demo.domain.Comment">
         SELECT commentId,articleId,userId
             targetCommentId,replyCommentId,commentText,
-            commentTime,commentUpNumber,commentType,
-            immediateNumber
+            commentTime,
+            (SELECT count(*)
+            FROM commentup
+            where comment.commentId = commentup.commentId
+            )AS commentUpNumber
+            ,commentType,immediateNumber
         FROM comment
-        WHERE commentId=#{commentId}
+        WHERE targetCommentId=#{commentId} AND
+              commentType in(1,2)
+        ORDER BY commentUpNumber DESC
     </select>
     <select id="queryCommentByArticleId" resultType="com.cylwyc.demo.domain.Comment">
         SELECT commentId,articleId,userId
             targetCommentId,replyCommentId,commentText,
-            commentTime,commentUpNumber,commentType,
-            immediateNumber
+            commentTime,commentType,
+            immediateNumber,
+            (SELECT count(*)
+            FROM commentup
+            where comment.commentId = commentup.commentId
+            )AS commentUpNumber
         FROM comment
         WHERE articleId=#{articleId}
+        ORDER BY commentUpNumber DESC
+        LIMIT 0,10
     </select>
     <select id="queryCommentByUserId" resultType="com.cylwyc.demo.domain.Comment">
         SELECT commentId,articleId,userId
-        targetCommentId,replyCommentId,commentText,
-        commentTime,commentUpNumber,commentType,
-        immediateNumber
+            targetCommentId,replyCommentId,commentText,
+            commentTime,commentType,
+            immediateNumber,
+            (SELECT count(*)
+            FROM commentup
+            where comment.commentId = commentup.commentId
+            )AS commentUpNumber
         FROM comment
         WHERE userId=#{userId}
+        ORDER BY commentTime DESC
+        LIMIT 0,10
     </select>
     <insert id="insertComment" useGeneratedKeys="true" keyProperty="commentId"
                 keyColumn="commentId" parameterType="com.cylwyc.demo.domain.Comment">
         INSERT INTO
         comment(articleId,userId,targetCommentId,
                 replyCommentId,commentText,commentTime,
-                commentUpNumber,commentType,immediateNumber)
+                commentType,immediateNumber)
         VALUES (#{articleId},#{userId},#{targetCommentId},
         #{replyCommentId},#{commentText},#{commentTime},
-        #{commentUpNumber},#{commentType},#{immediateNumber})
+        #{commentType},#{immediateNumber})
     </insert>
+    <select id="queryCommentReplyById" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentId,articleId,userId
+            targetCommentId,replyCommentId,commentText,
+            commentTime,
+            (SELECT count(*)
+            FROM commentup
+            where comment.commentId = commentup.commentId
+            )AS commentUpNumber
+            ,commentType,immediateNumber
+        FROM comment
+        WHERE replyCommentId=#{commentId} AND
+              commentType in(1,2)
+        ORDER BY commentTime DESC
+    </select>
+    <select id="queryCommentImmediateByUserId" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentId,articleId,userId
+            targetCommentId,replyCommentId,commentText,
+            commentTime,commentType,
+            immediateNumber,
+            (SELECT count(*)
+            FROM commentup
+            where comment.commentId = commentup.commentId
+            )AS commentUpNumber
+        FROM comment
+        WHERE userId=#{userId} AND immediateNumber > 0
+        ORDER BY commentTime DESC
+        LIMIT 0,10
+    </select>
 </mapper>

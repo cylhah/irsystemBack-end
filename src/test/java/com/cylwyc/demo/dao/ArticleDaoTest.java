@@ -1,6 +1,7 @@
 package com.cylwyc.demo.dao;
 
 import com.cylwyc.demo.domain.Article;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,6 @@ public class ArticleDaoTest {
         System.out.println(test.toString());
     }
 
-    @Test
     public void queryTopNArticleIdByTypeId(){
         List<Integer> integerList = articleDao.queryTopNArticleIdByTypeName("java",10);
         List<Integer> integerList2 = articleDao.queryTopNArticleIdByTypeName("java",1);
@@ -37,7 +37,7 @@ public class ArticleDaoTest {
         System.out.println(articleDao.plusArticleClickNumber(1));
     }
 
-    @Test
+
     public void queryHistoryRecordByUserId() {
         List<Article> test = articleDao.queryHistoryRecordByUserId(1);
         System.out.println(test.toString());
