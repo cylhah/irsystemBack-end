@@ -17,5 +17,10 @@
               commentId = #{commentId}
     </delete>
 
-
+    <select id="selectCommentUp" resultType = "java.lang.Integer" >
+        SELECT count(*)
+        FROM commentup
+        WHERE userId = #{userId} AND
+              commentId = #{commentId}
+    </select>
 </mapper>

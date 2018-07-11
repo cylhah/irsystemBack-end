@@ -49,8 +49,7 @@
         ORDER BY commentTime DESC
         LIMIT #{page},10
     </select>
-    <insert id="insertComment" useGeneratedKeys="true" keyProperty="commentId"
-                keyColumn="commentId" parameterType="com.cylwyc.demo.domain.Comment">
+    <insert id="insertComment">
         INSERT INTO
         comment(articleId,userId,targetCommentId,
                 replyCommentId,commentText,commentTime,
