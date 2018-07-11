@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cylwyc.demo.dao.CommentUpDao">
+    <insert id="insertCommentUp" useGeneratedKeys="true" keyProperty="commentId"
+            keyColumn="commentId" parameterType="com.cylwyc.demo.domain.CommentUp">
+        INSERT INTO
+        commentup(userId, commentId)
+        VALUES (#{userId},#{commentId})
+    </insert>
+    
+    <delete id="deleteCommentUp">
+        DELETE
+        FROM commentup
+        WHERE userId = #{userId} AND
+              commentId = #{commentId}
+    </delete>
+
+
+</mapper>

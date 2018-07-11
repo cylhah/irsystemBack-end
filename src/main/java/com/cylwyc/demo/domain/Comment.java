@@ -24,6 +24,38 @@ public class Comment {
     //即时回复数
     private Integer immediateNumber;
 
+    private  String userName;
+
+    private boolean isUpEd = false;
+
+    private final boolean replyShow = false;
+
+    private  String userHeadUrl;
+
+    public boolean isUpEd() {
+        return isUpEd;
+    }
+
+    public void setUpEd(boolean upEd) {
+        isUpEd = upEd;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserHeadUrl() {
+        return userHeadUrl;
+    }
+
+    public void setUserHeadUrl(String userHeadUrl) {
+        this.userHeadUrl = userHeadUrl;
+    }
+
     public Integer getCommentId() {
         return commentId;
     }
@@ -117,6 +149,9 @@ public class Comment {
                 ", commentUpNumber=" + commentUpNumber +
                 ", commentType=" + commentType +
                 ", immediateNumber=" + immediateNumber +
+                ", userName='" + userName + '\'' +
+                ", replyShow=" + replyShow +
+                ", userHeadUrl='" + userHeadUrl + '\'' +
                 '}';
     }
 }

@@ -6,11 +6,10 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface CommentDao {
-    List<Comment> queryCommentChildById(@Param("commentId") int commentId);
-    List<Comment> queryCommentByArticleId(@Param("articleId") int articleId);
-    List<Comment> queryCommentByUserId(@Param("userId") int userId);
+    List<Comment> queryCommentChildById(@Param("commentId") int commentId,@Param("page") int page);
+    List<Comment> queryCommentByArticleId(@Param("articleId") int articleId,@Param("page") int page);
+    List<Comment> queryCommentByUserId(@Param("userId") int userId,@Param("page") int page);
     int insertComment(Comment comment);
-    List<Comment> queryCommentReplyById(@Param("commentId") int commentId);
+    List<Comment> queryCommentReplyById(@Param("commentId") int commentId,@Param("page") int page);
     List<Comment> queryCommentImmediateByUserId(@Param("userId") int userId);
-
 }
