@@ -103,4 +103,20 @@ public class Comment {
     public void setImmediateNumber(Integer immediateNumber) {
         this.immediateNumber = immediateNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "commentId=" + commentId +
+                ", articleId=" + articleId +
+                ", userId=" + userId +
+                ", targetCommentId=" + targetCommentId +
+                ", replyCommentId=" + replyCommentId +
+                ", commentText='" + commentText + '\'' +
+                ", commentTime=" + commentTime +
+                ", commentUpNumber=" + commentUpNumber +
+                ", commentType=" + commentType +
+                ", immediateNumber=" + immediateNumber +
+                '}';
+    }
 }

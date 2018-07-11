@@ -1,6 +1,7 @@
 package com.cylwyc.demo.dao;
 
 import com.cylwyc.demo.domain.Article;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +20,6 @@ public class ArticleDaoTest {
     @Test
     public void queryArticleById() {
         Article test = articleDao.queryArticleById(1);
-        System.out.println(test.toString());
-    }
-
-    @Test
-    public void queryHottestArticleByTypeId() {
-        Article test = articleDao.queryHottestArticleByTypeId(2);
-        System.out.println(test.toString());
-    }
-
-    @Test
-    public void queryArticleByIdAndUserId() {
-        Article test = articleDao.queryArticleByIdAndUserId(1,1);
         System.out.println(test.toString());
     }
 
