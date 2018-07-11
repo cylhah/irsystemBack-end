@@ -31,8 +31,8 @@
     <select id="queryArticleById" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
-            articlePicUrl,articleUpNumber,
-            articleDownNumber,articleTime,
+            articlePicUrl,(SELECT count(*) FROM upanddown WHERE articleId=#{articleId} and upOrDown=1) articleUpNumber,
+            (SELECT count(*) FROM upanddown WHERE articleId=#{articleId} and upOrDown=2) articleDownNumber,articleTime,
             (SELECT AVG(articleScore) From article,articlescore Where article.articleId=#{articleId} and articlescore.articleId=article.articleId) articleScore,sourceName,
             keywordName,keywordWeight
             sourceType,stratDate,clickNumber
@@ -55,12 +55,12 @@
     <select id="queryHistoryRecordByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
-            articlePicUrl,articleUpNumber,
-            articleDownNumber,articleTime,
+            articlePicUrl,(SELECT count(*) FROM upanddown WHERE articleId=historyrecord.articleId and upOrDown=1) articleUpNumber,
+            (SELECT count(*) FROM upanddown WHERE articleId=historyrecord.articleId and upOrDown=2) articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
             clickNumber,historyRecordTime
-        FROM historyRecord,article,type,source,collection
+        FROM historyRecord,article,type,source
         WHERE historyRecord.userId=#{userId}
         AND historyRecord.articleId=article.articleId
         AND article.typeId=type.typeId
@@ -75,8 +75,8 @@
     <select id="queryCollectionByUserId" resultMap="article">
         SELECT article.articleId,typeName,
             articleTitle,articleText,
-            articlePicUrl,articleUpNumber,
-            articleDownNumber,articleTime,
+            articlePicUrl,(SELECT count(*) FROM upanddown WHERE articleId=collection.articleId and upOrDown=1) articleUpNumber,
+            (SELECT count(*) FROM upanddown WHERE articleId=collection.articleId and upOrDown=2) articleDownNumber,articleTime,
             sourceName,
             sourceType,stratDate,
             clickNumber,collectTime

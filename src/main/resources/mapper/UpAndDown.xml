@@ -13,7 +13,13 @@
         INSERT INTO upanddown (userId, articleId, upOrDown)
                 VALUES (#{userId},#{articleId},#{upOrDown})
     </insert>
-    <delete id="deleteUpAndDownDao">
+    <update id="updateUpAndDown">
+        UPDATE upanddown
+        SET upOrDown=#{upOrDown}
+        WHERE userId=#{userId}
+        AND articleId=#{articleId}
+    </update>
+    <delete id="deleteUpAndDown">
         DELETE FROM
         upAndDown
         WHERE
