@@ -21,13 +21,13 @@ public class CommentServiceImpl implements CommentService {
     private CommentUpDao commentUpDao;
 
     @Override
-    public List<Comment> getCommentByAticleId(int articleId, int page) {
+    public List<Comment> getCommentByAticleId(int articleId, int page,int userId) {
         List<Comment> comments = commentDao.queryCommentByArticleId(articleId,page*10);
         CommentUp commentUp = new CommentUp();
         int i ,j ;
         for (i=0;i<comments.size();i++){
             commentUp.setCommentId(comments.get(i).getCommentId());
-            commentUp.setUserId(comments.get(i).getUserId());
+            commentUp.setUserId(userId);
             j = commentUpDao.selectCommentUp(commentUp);
             if (j==1){
                 comments.get(i).setUpEd(true);
@@ -105,9 +105,22 @@ public class CommentServiceImpl implements CommentService {
      * @return
      */
     @Override
-    public List<Comment> getCommentChild(int commentId , int page) {
+    public List<Comment> getCommentChild(int commentId , int page,int userId) {
         if (commentId>0){
          List<Comment> comments = commentDao.queryCommentChildById(commentId,page*10);
+            CommentUp commentUp = new CommentUp();
+            int t,j ;
+            for (t=0;t<comments.size();t++){
+                commentUp.setUserId(userId);
+                commentUp.setCommentId(comments.get(t).getCommentId());
+                j = commentUpDao.selectCommentUp(commentUp);
+                if (j==1){
+                    comments.get(t).setUpEd(true);
+                }
+                else {
+                    comments.get(t).setUpEd(false);
+                }
+            }
          return comments;
         }
         return null;

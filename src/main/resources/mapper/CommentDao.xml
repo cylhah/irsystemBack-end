@@ -17,7 +17,7 @@
             WHERE c.userId =
                 (SELECT d.userId
                 FROM comment d
-                WHERE d.commentId = a.targetCommentId
+                WHERE d.commentId = a.replyCommentId
                 )) AS replyTo
         FROM comment a,user b
         WHERE targetCommentId=#{commentId} AND
@@ -41,7 +41,8 @@
             )AS replyNum
         FROM comment a,user b
         WHERE articleId=#{articleId} AND
-              a.userId = b.userId
+              a.userId = b.userId AND
+              a.commentType = 0
         ORDER BY commentUpNumber DESC
         LIMIT #{page},10
     </select>

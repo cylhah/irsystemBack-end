@@ -12,7 +12,7 @@ public interface CommentService {
      * @param page 评论页码
      * @return
      */
-    List<Comment> getCommentByAticleId(int articleId, int page);
+    List<Comment> getCommentByAticleId(int articleId, int page,int userId);
 
     /**
      * 用户评论文章-type标识为0
@@ -42,7 +42,7 @@ public interface CommentService {
      * @param commentId 父评论的id
      * @return 返回自评论的列表
      */
-    List<Comment> getCommentChild(int commentId, int page);
+    List<Comment> getCommentChild(int commentId, int page, int userId);
 
 
     /**
