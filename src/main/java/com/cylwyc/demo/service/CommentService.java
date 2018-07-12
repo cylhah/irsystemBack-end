@@ -45,4 +45,10 @@ public interface CommentService {
     List<Comment> getCommentChild(int commentId, int page);
 
 
+    /**
+     * 获得用户对文章的评论
+     * @param userId
+     * @return
+     */
+    List<Comment> getUserCommentToArticle(int userId);
 }

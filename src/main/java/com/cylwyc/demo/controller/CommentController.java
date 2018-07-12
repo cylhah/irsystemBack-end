@@ -45,4 +45,9 @@ public class CommentController {
         List<Comment> comments = commentService.getCommentChild(commentId,page);
         return comments;
     }
+
+    @GetMapping(value = "/userId/{userId}")
+    public List<Comment> getUserCommentToArticle(@PathVariable("userId") int userId){
+        return commentService.getUserCommentToArticle(userId);
+    }
 }

@@ -112,4 +112,9 @@ public class CommentServiceImpl implements CommentService {
         }
         return null;
     }
+
+    @Override
+    public List<Comment> getUserCommentToArticle(int userId) {
+        return commentDao.queryUserCommentToArticle(userId);
+    }
 }

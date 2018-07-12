@@ -13,7 +13,7 @@ jdbc:
   Driver: com.mysql.jdbc.Driver
   Url: jdbc:mysql://127.0.0.1:3306/irsystem?useUnicode=true&characterEncoding=utf8&useSSL=false
   Username: root
-  Password: Poison0809.
+  Password: isayaiu123
 
 mybatis_config_file: mybatis-config.xml
 mapper_path: /mapper/**.xml

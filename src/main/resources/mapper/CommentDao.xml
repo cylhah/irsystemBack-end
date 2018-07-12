@@ -99,4 +99,11 @@
               comment.userId = user.userId
         ORDER BY commentTime DESC
     </select>
+    <select id="queryUserCommentToArticle" resultType="com.cylwyc.demo.domain.Comment">
+        SELECT commentText,commentTime,articleId
+        FROM comment
+        WHERE comment.userId=#{userId}
+        AND targetCommentId IS NULL
+        AND replyCommentId IS  NULL
+    </select>
 </mapper>

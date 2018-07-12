@@ -43,10 +43,39 @@
         AND article.articleId=keywordweight.articleId
         AND keywordweight.keywordId=keyword.keywordId
     </select>
+    <select id="queryTopNArticleIdByDay" resultType="Integer">
+        SELECT article.articleId
+        FROM article,articlescore
+        WHERE articleTime BETWEEN #{sDate} AND #{eDate}
+        AND article.articleId=articleScore.articleId
+        GROUP BY article.articleId
+        ORDER BY avg(articleScore) DESC
+        LIMIT 0,${topNum}
+    </select>
+    <select id="queryArticleByDay" resultMap="article">
+        SELECT article.articleId,typeName,
+            articleTitle,articleText,
+            articlePicUrl,articleTime,
+            sourceName,
+            sourceType,stratDate,clickNumber
+        FROM article,type,source
+        WHERE article.articleTime BETWEEN #{sDate} AND #{eDate}
+        AND article.typeId=type.typeId
+        AND article.sourceId=source.sourceId
+    </select>
     <select id="queryTopNArticleIdByTypeName" resultType="Integer">
         SELECT article.articleId
         FROM article,articlescore
         WHERE article.typeId=(SELECT typeId FROM type WHERE typeName=#{typeName})
+        AND article.articleId=articleScore.articleId
+        GROUP BY article.articleId
+        ORDER BY avg(articleScore) DESC
+        LIMIT 0,${topNum}
+    </select>
+    <select id="queryTopNArticleIdByTypeId" resultType="Integer">
+        SELECT article.articleId
+        FROM article,articlescore
+        WHERE article.typeId=#{typeId}
         AND article.articleId=articleScore.articleId
         GROUP BY article.articleId
         ORDER BY avg(articleScore) DESC
