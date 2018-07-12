@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface UserAndTypeDao {
+    List<Type> queryAllType();
     List<Type> queryTypeByUserId(@Param("userId") int userId);
     int queryUserAndType(@Param("userId") int userId,@Param("typeId") int typeId);
     int insertUserAndType(@Param("userId") int userId,@Param("typeId") int typeId);

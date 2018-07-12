@@ -15,6 +15,11 @@ public class UserAndTypeServiceImpl implements UserAndTypeService {
     private UserAndTypeDao userAndTypeDao;
 
     @Override
+    public List<Type> queryAllType() {
+        return userAndTypeDao.queryAllType();
+    }
+
+    @Override
     public List<Type> getTypeByUserId(int userId) {
         return userAndTypeDao.queryTypeByUserId(userId);
     }

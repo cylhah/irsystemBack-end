@@ -5,6 +5,9 @@
 #    username: root
 #    password: isayaiu123
 
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
 
 jdbc:
   Driver: com.mysql.jdbc.Driver
