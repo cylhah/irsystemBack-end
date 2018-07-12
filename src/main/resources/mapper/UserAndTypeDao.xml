@@ -3,6 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.UserAndTypeDao">
+    <select id="queryAllType" resultType="com.cylwyc.demo.domain.Type">
+        SELECT type.typeId,typeName,typeDescription
+        FROM type
+    </select>
     <select id="queryTypeByUserId" resultType="com.cylwyc.demo.domain.Type">
         SELECT type.typeId,typeName,typeDescription
         FROM user,type,userandtype

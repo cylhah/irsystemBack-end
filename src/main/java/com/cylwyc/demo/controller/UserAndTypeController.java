@@ -14,9 +14,20 @@ public class UserAndTypeController {
     @Autowired
     private UserAndTypeService userAndTypeService;
 
+    @GetMapping(value = "/type")
+    public List<Type> queryAllType(){
+        return userAndTypeService.queryAllType();
+    }
+
     @GetMapping(value = "/userId/{userId}")
     public List<Type> getTypeByUserId(@PathVariable("userId") int userId) {
         return userAndTypeService.getTypeByUserId(userId);
+    }
+
+    @GetMapping(value = "/userId/{userId}/typeId/{typeId}")
+    public int getUserAndType(@PathVariable("userId") int userId,
+                              @PathVariable("typeId") int typeId){
+        return userAndTypeService.getUserAndType(userId, typeId);
     }
 
     @PostMapping(value = "/userId/{userId}/typeId/{typeId}")
