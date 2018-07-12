@@ -17,7 +17,7 @@
             WHERE c.userId =
                 (SELECT d.userId
                 FROM comment d
-                WHERE d.commentId = a.targetCommentId
+                WHERE d.commentId = a.replyCommentId
                 )) AS replyTo
         FROM comment a,user b
         WHERE targetCommentId=#{commentId} AND

@@ -41,8 +41,8 @@ public class CommentController {
     }
 
     @PostMapping(value = "/getCommentChild")
-    public List<Comment> getCommentChild(@RequestParam int commentId,@RequestParam int page){
-        List<Comment> comments = commentService.getCommentChild(commentId,page);
+    public List<Comment> getCommentChild(@RequestParam int commentId,@RequestParam int page,@RequestParam int userId){
+        List<Comment> comments = commentService.getCommentChild(commentId,page,userId);
         return comments;
     }
 }

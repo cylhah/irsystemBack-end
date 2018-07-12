@@ -42,7 +42,7 @@ public interface CommentService {
      * @param commentId 父评论的id
      * @return 返回自评论的列表
      */
-    List<Comment> getCommentChild(int commentId, int page);
+    List<Comment> getCommentChild(int commentId, int page, int userId);
 
 
 }
