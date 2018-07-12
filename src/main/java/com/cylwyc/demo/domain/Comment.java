@@ -1,5 +1,8 @@
 package com.cylwyc.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Comment {
@@ -16,6 +19,7 @@ public class Comment {
 
     private String commentText;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date commentTime;
 
     private Integer commentUpNumber;
@@ -24,7 +28,27 @@ public class Comment {
     //即时回复数
     private Integer immediateNumber;
 
-    private  String userName;
+    private String userName;
+
+    private String replyTo;
+
+    private Integer replyNum;
+
+    public Integer getReplyNum() {
+        return replyNum;
+    }
+
+    public void setReplyNum(Integer replyNum) {
+        this.replyNum = replyNum;
+    }
+
+    public String getReplyTo() {
+        return replyTo;
+    }
+
+    public void setReplyTo(String replyTo) {
+        this.replyTo = replyTo;
+    }
 
     private boolean isUpEd = false;
 
@@ -160,8 +184,12 @@ public class Comment {
                 ", commentType=" + commentType +
                 ", immediateNumber=" + immediateNumber +
                 ", userName='" + userName + '\'' +
+                ", replyTo='" + replyTo + '\'' +
+                ", replyNum=" + replyNum +
+                ", isUpEd=" + isUpEd +
                 ", replyShow=" + replyShow +
                 ", userHeadUrl='" + userHeadUrl + '\'' +
+                ", reply='" + reply + '\'' +
                 '}';
     }
 }

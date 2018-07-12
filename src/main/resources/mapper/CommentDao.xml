@@ -4,38 +4,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cylwyc.demo.dao.CommentDao">
     <select id="queryCommentChildById" resultType="com.cylwyc.demo.domain.Comment">
-        SELECT commentId,articleId,comment.userId
+        SELECT commentId,articleId,a.userId,
             targetCommentId,replyCommentId,commentText,
             commentTime,
             (SELECT count(*)
-            FROM commentup
-            where comment.commentId = commentup.commentId
+                FROM commentup
+                where a.commentId = commentup.commentId
             )AS commentUpNumber
-            ,commentType,immediateNumber,userName,userHeadUrl
-        FROM comment,user
+            ,commentType,immediateNumber,userName,userHeadUrl,
+            (SELECT c.userName
+            FROM user c
+            WHERE c.userId =
+                (SELECT d.userId
+                FROM comment d
+                WHERE d.commentId = a.targetCommentId
+                )) AS replyTo
+        FROM comment a,user b
         WHERE targetCommentId=#{commentId} AND
               commentType in(1,2) AND
-              comment.userId = user.userId
+              a.userId = b.userId
         ORDER BY commentUpNumber DESC
         LIMIT #{page},10
     </select>
     <select id="queryCommentByArticleId" resultType="com.cylwyc.demo.domain.Comment">
-        SELECT commentId,articleId,comment.userId
+        SELECT commentId,articleId,a.userId,
             targetCommentId,replyCommentId,commentText,
             commentTime,commentType,
             immediateNumber,
             (SELECT count(*)
             FROM commentup
-            where comment.commentId = commentup.commentId
-            )AS commentUpNumber,userName,userHeadUrl
-        FROM comment,user
+            where a.commentId = commentup.commentId
+            )AS commentUpNumber,userName,userHeadUrl,
+            (SELECT count(*)
+            FROM comment c
+            WHERE c.targetCommentId = a.commentId
+            )AS replyNum
+        FROM comment a,user b
         WHERE articleId=#{articleId} AND
-              comment.userId = user.userId
+              a.userId = b.userId
         ORDER BY commentUpNumber DESC
         LIMIT #{page},10
     </select>
     <select id="queryCommentByUserId" resultType="com.cylwyc.demo.domain.Comment">
-        SELECT commentId,articleId,comment.userId
+        SELECT commentId,articleId,comment.userId,
             targetCommentId,replyCommentId,commentText,
             commentTime,commentType,
             immediateNumber,
@@ -59,7 +70,7 @@
         #{commentType},#{immediateNumber})
     </insert>
     <select id="queryCommentReplyById" resultType="com.cylwyc.demo.domain.Comment">
-        SELECT commentId,articleId,comment.userId
+        SELECT commentId,articleId,comment.userId,
             targetCommentId,replyCommentId,commentText,
             commentTime,
             (SELECT count(*)
@@ -75,7 +86,7 @@
         LIMIT #{page},10
     </select>
     <select id="queryCommentImmediateByUserId" resultType="com.cylwyc.demo.domain.Comment">
-        SELECT commentId,articleId,comment.userId
+        SELECT commentId,articleId,comment.userId,
             targetCommentId,replyCommentId,commentText,
             commentTime,commentType,
             immediateNumber,
