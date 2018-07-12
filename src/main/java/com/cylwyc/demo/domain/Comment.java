@@ -52,7 +52,7 @@ public class Comment {
 
     private boolean isUpEd = false;
 
-    private final boolean replyShow = false;
+    private boolean replyShow = false;
 
     private  String userHeadUrl;
 
@@ -60,6 +60,14 @@ public class Comment {
 
     public String getReply() {
         return reply;
+    }
+
+    public boolean isReplyShow() {
+        return replyShow;
+    }
+
+    public void setReplyShow(boolean replyShow) {
+        this.replyShow = replyShow;
     }
 
     public void setReply(String reply) {

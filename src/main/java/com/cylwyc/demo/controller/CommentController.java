@@ -17,8 +17,8 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping(value = "/articleComment")
-    public List<Comment> getArticleComment(@RequestParam int articleId,@RequestParam int page){
-        List<Comment> comments = commentService.getCommentByAticleId(articleId,page);
+    public List<Comment> getArticleComment(@RequestParam int articleId,@RequestParam int page,@RequestParam int userId){
+        List<Comment> comments = commentService.getCommentByAticleId(articleId,page,userId);
         return comments;
     }
 
