@@ -26,6 +26,11 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public List<User> queryUserByDate(String sDate, String eDate) {
+        return userDao.queryUserByDate(sDate, eDate);
+    }
+
+    @Override
     public int login(String userAccount, String userPassword) {
         return userDao.queryAccountAndPassword(userAccount, userPassword);
     }

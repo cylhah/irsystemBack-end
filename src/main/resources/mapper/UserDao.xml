@@ -8,6 +8,11 @@
         FROM user
         WHERE userId=#{userId}
     </select>
+    <select id="queryUserByDate" resultType="com.cylwyc.demo.domain.User">
+        SELECT userId,userName,userPhone,userAccount,userPassword,userRegisTime,userEmail,userHeadUrl
+        FROM user
+        WHERE userRegisTime BETWEEN #{sDate} AND #{eDate}
+    </select>
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="userId"
     keyColumn="userId" parameterType="com.cylwyc.demo.domain.User">
         INSERT INTO user(userId, userName, userPhone, userEmail, userAccount, userPassword, userHeadUrl)

@@ -2,6 +2,7 @@ package com.cylwyc.demo.dao;
 
 import com.cylwyc.demo.domain.Article;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public interface ArticleDao {
      * @return
      */
     List<Article> queryArticleByDay(@Param("sDate") String sDate,@Param("eDate") String eDate);
+    int queryArticleAmountByDay(@Param("sDate") String sDate,@Param("eDate") String eDate);
     List<Integer> queryTopNArticleIdByTypeName(@Param("typeName") String typeName,@Param("topNum") int topNum);
     List<Integer> queryTopNArticleIdByTypeId(@Param("typeId") int typeId,@Param("topNum") int topNum);
     List<Article> queryHistoryRecordByUserId(@Param("userId") int userId);

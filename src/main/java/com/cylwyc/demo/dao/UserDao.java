@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface UserDao {
     User queryUserById(@Param("userId") int userId);
+    List<User> queryUserByDate(@Param("sDate") String sDate,@Param("eDate") String eDate);
     int queryAccountAndPassword(@Param("userAccount") String userAccount,@Param("userPassword") String userPassword);
     int insertUser(User user);
     int updatePassword(@Param("userId") int userId,@Param("userPassword") String userPassword);

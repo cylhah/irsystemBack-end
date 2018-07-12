@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface UserService {
     User getUserById(int userId);
+    List<User> queryUserByDate(String sDate,String eDate);
     int login(String userAccount,String userPassword);
     int insertUser(User user);
     int updatePassword(int userId,String userPassword);

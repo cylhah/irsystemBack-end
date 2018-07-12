@@ -26,7 +26,7 @@ public class ArticleController {
         return articleService.getTopNArticleIdByDay(sDate, eDate, topNum);
     }
 
-    @GetMapping(value = "/date")
+    @PostMapping(value = "/date")
     public List<Article> getArticleByDay(@RequestParam("sDate") String sDate,
                                          @RequestParam("eDate") String eDate){
         return articleService.getArticleByDay(sDate, eDate);
