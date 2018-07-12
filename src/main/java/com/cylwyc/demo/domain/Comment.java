@@ -32,6 +32,16 @@ public class Comment {
 
     private  String userHeadUrl;
 
+    private  String reply = "";
+
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(String reply) {
+        this.reply = reply;
+    }
+
     public boolean isUpEd() {
         return isUpEd;
     }
