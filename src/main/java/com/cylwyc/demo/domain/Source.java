@@ -1,5 +1,7 @@
 package com.cylwyc.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Source {
@@ -10,6 +12,7 @@ public class Source {
 
     private String sourceType;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date startDate;
 
     public Integer getSourceId() {

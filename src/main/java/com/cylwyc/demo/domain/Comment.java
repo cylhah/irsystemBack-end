@@ -34,6 +34,16 @@ public class Comment {
 
     private Integer replyNum;
 
+    private boolean ifReply = false;
+
+    public boolean isIfReply() {
+        return ifReply;
+    }
+
+    public void setIfReply(boolean ifReply) {
+        this.ifReply = ifReply;
+    }
+
     public Integer getReplyNum() {
         return replyNum;
     }
@@ -194,6 +204,7 @@ public class Comment {
                 ", userName='" + userName + '\'' +
                 ", replyTo='" + replyTo + '\'' +
                 ", replyNum=" + replyNum +
+                ", ifReply=" + ifReply +
                 ", isUpEd=" + isUpEd +
                 ", replyShow=" + replyShow +
                 ", userHeadUrl='" + userHeadUrl + '\'' +

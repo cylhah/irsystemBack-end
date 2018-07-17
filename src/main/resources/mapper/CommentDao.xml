@@ -107,4 +107,9 @@
         AND targetCommentId IS NULL
         AND replyCommentId IS  NULL
     </select>
+    <update id="updateCommentImmediate">
+        UPDATE comment
+        SET immediateNumber = immediateNumber+1
+        WHERE commentId = #{replyCommentId}
+    </update>
 </mapper>

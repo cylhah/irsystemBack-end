@@ -31,13 +31,25 @@ public class CommentController {
     @PostMapping(value = "/replyArticleComment")
     public int replyArticleComment(@RequestBody Comment comment){
         int i = commentService.replyArticleComment(comment);
-        return i;
+        int j = commentService.updateCommentImmediate(comment.getReplyCommentId());
+        if (i==1&&j==1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @PostMapping(value = "/replyCommentComment")
     public int replyCommentComment(@RequestBody Comment comment){
         int i = commentService.replyCommentComment(comment);
-        return i;
+        int j = commentService.updateCommentImmediate(comment.getReplyCommentId());
+        if (i==1&&j==1){
+            return 1;
+        }
+        else{
+            return 0;
+        }
     }
 
     @PostMapping(value = "/getCommentChild")

@@ -27,6 +27,8 @@
     <resultMap id="source" type="com.cylwyc.demo.domain.Source">
         <result property="sourceName" column="sourceName" />
         <result property="sourceType" column="sourceType" />
+        <result property="sourceId" column="sourceId" />
+        <result property="startDate" column="stratDate" />
     </resultMap>
     <select id="queryArticleById" resultMap="article">
         SELECT article.articleId,typeName,
@@ -34,8 +36,8 @@
             articlePicUrl,(SELECT count(*) FROM upanddown WHERE articleId=#{articleId} and upOrDown=1) articleUpNumber,
             (SELECT count(*) FROM upanddown WHERE articleId=#{articleId} and upOrDown=2) articleDownNumber,articleTime,
             (SELECT AVG(articleScore) From article,articlescore Where article.articleId=#{articleId} and articlescore.articleId=article.articleId) articleScore,sourceName,
-            keywordName,keywordWeight
-            sourceType,stratDate,clickNumber
+            keywordName,keywordWeight,
+            sourceType,stratDate,clickNumber,source.sourceId,stratDate
         FROM article,type,source,keyword,keywordweight
         WHERE article.articleId=#{articleId}
         AND article.typeId=type.typeId

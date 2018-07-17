@@ -13,4 +13,5 @@ public interface CommentDao {
     int insertComment(Comment comment);
     List<Comment> queryCommentReplyById(@Param("commentId") int commentId,@Param("page") int page);
     List<Comment> queryCommentImmediateByUserId(@Param("userId") int userId);
+    int updateCommentImmediate(@Param("replyCommentId") int replyCommentId);
 }

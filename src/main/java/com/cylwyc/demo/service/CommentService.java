@@ -51,4 +51,11 @@ public interface CommentService {
      * @return
      */
     List<Comment> getUserCommentToArticle(int userId);
+
+    /**
+     * 评论某人之后即时评论数加1
+     * @param replyCommentId 被回复的评论的ID
+     * @return 影响的行数
+     */
+    int updateCommentImmediate(int replyCommentId);
 }

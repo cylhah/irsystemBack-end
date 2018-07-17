@@ -29,4 +29,11 @@
         historyrecord
         WHERE userId=#{userId}
     </delete>
+    <select id="queryLatestHistoryRecordDouble" resultType="java.lang.Integer">
+        SELECT articleId
+        FROM historyrecord
+        WHERE userId = #{userId}
+        ORDER BY historyRecordTime DESC
+        LIMIT 0,2
+    </select>
 </mapper>

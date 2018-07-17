@@ -130,4 +130,10 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getUserCommentToArticle(int userId) {
         return commentDao.queryUserCommentToArticle(userId);
     }
+
+    @Override
+    public int updateCommentImmediate(int replyCommentId){
+        int i = commentDao.updateCommentImmediate(replyCommentId);
+        return i;
+    }
 }

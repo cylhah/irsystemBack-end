@@ -11,4 +11,5 @@ public interface HistoryRecordDao {
     int deleteHistoryRecord(@Param("userId") int userId,@Param("articleId") int articleId);
     int updateHistoryRecord(@Param("userId") int userId, @Param("articleId") int articleId, @Param("historyRecordTime")Date historyRecordTime);
     int deleteAllHistoryRecordByUserId(@Param("userId") int userId);
+    List<Integer> queryLatestHistoryRecordDouble(@Param("userId") int userId);
 }

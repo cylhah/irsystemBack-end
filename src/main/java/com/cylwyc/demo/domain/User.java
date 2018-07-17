@@ -1,5 +1,7 @@
 package com.cylwyc.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class User {
 
     private String userPassword;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date userRegisTime;
 
     private String userHeadUrl;

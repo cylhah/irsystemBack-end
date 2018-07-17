@@ -1,5 +1,7 @@
 package com.cylwyc.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class Article {
 
     private Integer articleDownNumber;
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private Date articleTime;
 
     private Double articleScore;
